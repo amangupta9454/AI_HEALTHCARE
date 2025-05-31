@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Appointment = require('../models/Appointment');
 const User = require('../models/User');
-const auth = require('../middleware/auth');
+const auth = require('../Middleware/auth');
 const upload = require('../Middleware/upload');
 
 // Book Appointment (Patient)

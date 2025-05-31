@@ -3,7 +3,7 @@ const router = express.Router();
 const { loginUser, registerUser, sendOtp, verifyOtpAndLogin, getUserProfile, updateUserProfile, updatePassword, checkListingStatus } = require('../controllers/authController');
 const { createOrUpdateListing, getAcceptedListings } = require('../controllers/listingController');
 const { bookAppointment, getUserAppointments, acceptAppointment, rejectAppointment, rescheduleAppointment } = require('../controllers/appointmentController');
-const authMiddleware = require('../middleware/auth');
+const authMiddleware = require('../Middleware/auth');
 const multer = require('multer');
 
 // Configure multer
