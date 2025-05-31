@@ -62,7 +62,7 @@ exports.sendOtp = async (req, res) => {
           subject: 'Your OTP for Healthcare System Registration',
           text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
         });
-        console.log('OTP sent to:', email);
+        // console.log('OTP sent to:', email);
         res.status(200).json({ message: 'OTP sent successfully' });
       } catch (emailError) {
         console.error('Nodemailer error:', emailError.message);
@@ -120,9 +120,9 @@ exports.verifyOtpAndLogin = async (req, res) => {
           subject: 'Login Alert',
           text: `Hello ${user.name},\n\nYou have successfully logged in as a ${role} at ${new Date().toLocaleString()}.\n\nBest regards,\nHealthcare Team`,
         });
-        console.log('Login email sent to:', user.email);
+        // console.log('Login email sent to:', user.email);
       } catch (emailError) {
-        console.error('Nodemailer error:', emailError.message);
+        // console.error('Nodemailer error:', emailError.message);
       }
     }
 
@@ -173,7 +173,7 @@ exports.registerUser = async (req, res) => {
     const photo = req.body.photo || (req.file ? req.file.buffer.toString('base64') : '');
 
     // Log received data for debugging
-    console.log('Received registration data:', { name, email, mobile, age, gender, role, hasPhoto: !!photo });
+    // console.log('Received registration data:', { name, email, mobile, age, gender, role, hasPhoto: !!photo });
 
     // Validate OTP
     const storedOtp = otpStore.get(email);
@@ -292,7 +292,7 @@ exports.registerUser = async (req, res) => {
           subject: `Welcome to Healthcare System as ${role}`,
           text: `Hello ${user.name},\n\nYour registration as a ${role} is successful!\n\nBest regards,\nHealthcare Team`,
         });
-        console.log('Registration email sent to:', user.email);
+        // console.log('Registration email sent to:', user.email);
       } catch (emailError) {
         console.error('Nodemailer error:', emailError.message);
       }
@@ -324,7 +324,7 @@ exports.loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Email, password, and role are required' });
     }
 
-    console.log('Login attempt: Email:', email, 'Role:', role);
+    // console.log('Login attempt: Email:', email, 'Role:', role);
 
     const user = await User.findOne({ email, role });
     if (!user) {
@@ -332,14 +332,14 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or role' });
     }
 
-    console.log('Found user:', { id: user._id, email: user.email, role: user.role });
+    // console.log('Found user:', { id: user._id, email: user.email, role: user.role });
 
     if (role === 'patient' && !await user.matchPassword(password)) {
       console.error('Password mismatch for user:', email);
       return res.status(401).json({ message: 'Invalid password' });
     }
 
-    console.log('Password verified for role:', role);
+    // console.log('Password verified for role:', role);
 
     if (!process.env.JWT_SECRET) {
       console.error('JWT_SECRET is not defined');
@@ -357,13 +357,13 @@ exports.loginUser = async (req, res) => {
           subject: 'Login Alert',
           text: `Hello ${user.name},\n\nYou have successfully logged in as a ${role} at ${new Date().toLocaleString()}.\n\nBest regards,\nHealthcare Team`,
         });
-        console.log('Login email sent to:', user.email);
+        // console.log('Login email sent to:', user.email);
       } catch (emailError) {
         console.error('Nodemailer error:', emailError.message);
       }
     }
 
-    console.log('Login successful for:', email);
+    // console.log('Login successful for:', email);
     res.json({
       token,
       user: {
@@ -403,8 +403,8 @@ exports.updateUserProfile = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    console.log('req.body:', req.body);
-    console.log('req.file:', req.file);
+    // console.log('req.body:', req.body);
+    // console.log('req.file:', req.file);
 
     const {
       name = user.name,

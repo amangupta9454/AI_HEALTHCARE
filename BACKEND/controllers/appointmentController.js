@@ -143,7 +143,7 @@ exports.bookAppointment = async (req, res) => {
           subject: 'New Appointment Booking',
           text: `Hello Dr. ${doctor.name},\n\nA new appointment has been booked by ${patient.name}.\n\nDetails:\nName: ${name}\nAge: ${age}\nGender: ${gender}\nEmail: ${email}\nMobile: ${mobile}\nAddress: ${address}\nDate: ${new Date(date).toLocaleDateString()}\nTime: ${time}\nReason: ${reason}\nPrevious Treatment: ${previousTreatment || 'None'}\nRemarks: ${remarks || 'None'}\nMedical Certificate: ${medicalCertificateUrl || 'None'}\n\nBest regards,\nHealthcare Team`,
         });
-        console.log('Appointment emails sent to:', patient.email, doctor.email);
+        // console.log('Appointment emails sent to:', patient.email, doctor.email);
       } catch (emailError) {
         console.error('Nodemailer error:', emailError.message);
       }

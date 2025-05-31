@@ -3,18 +3,18 @@ const router = express.Router();
 const Appointment = require('../models/Appointment');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
-const upload = require('../middleware/upload');
+const upload = require('../Middleware/upload');
 
 // Book Appointment (Patient)
 router.post('/book-appointment', (req, res, next) => {
-  console.log('Route /book-appointment hit'); // Debug log
-  console.log('Request headers:', req.headers); // Log headers
-  console.log('Request body:', req.body); // Log body
+  // console.log('Route /book-appointment hit'); // Debug log
+  // console.log('Request headers:', req.headers); // Log headers
+  // console.log('Request body:', req.body); // Log body
   next();
 }, auth, upload, async (req, res) => {
-  console.log('POST /book-appointment processing');
-  console.log('Authenticated user:', req.user);
-  console.log('File received:', req.file); // Debug file
+  // console.log('POST /book-appointment processing');
+  // console.log('Authenticated user:', req.user);
+  // console.log('File received:', req.file); // Debug file
 
   if (req.user.role !== 'patient') {
     console.error('Access denied: User role:', req.user.role);
@@ -27,7 +27,7 @@ router.post('/book-appointment', (req, res, next) => {
       reason, previousTreatment, remarks
     } = req.body;
 
-    console.log('Request body:', { name, age, gender, email, mobile, address, doctorId, date, time, reason });
+    // console.log('Request body:', { name, age, gender, email, mobile, address, doctorId, date, time, reason });
 
     if (!name || !age || !gender || !email || !mobile || !address || !doctorId || !date || !time || !reason) {
       console.error('Validation failed: Missing required fields');
@@ -43,9 +43,9 @@ router.post('/book-appointment', (req, res, next) => {
     let medicalCertificateUrl = '';
     if (req.file && req.file.path) {
       medicalCertificateUrl = req.file.path;
-      console.log('Medical certificate uploaded:', medicalCertificateUrl);
+      // console.log('Medical certificate uploaded:', medicalCertificateUrl);
     } else {
-      console.log('No medical certificate uploaded');
+      // console.log('No medical certificate uploaded');
     }
 
     const appointment = new Appointment({
@@ -67,12 +67,12 @@ router.post('/book-appointment', (req, res, next) => {
     });
 
     await appointment.save();
-    console.log('Appointment saved:', {
-      id: appointment._id,
-      medicalCertificate: appointment.medicalCertificate,
-    });
+    // console.log('Appointment saved:', {
+    //   id: appointment._id,
+    //   medicalCertificate: appointment.medicalCertificate,
+    // });
 
-    console.log('Appointment emails sent to:', email, doctor.email);
+    // console.log('Appointment emails sent to:', email, doctor.email);
     res.status(201).json({ message: 'Appointment booked successfully', appointment });
   } catch (error) {
     console.error('Error booking appointment:', error.message);
@@ -96,7 +96,7 @@ router.get('/appointments', auth, async (req, res) => {
       console.error('Access denied: User role:', req.user.role);
       return res.status(403).json({ message: 'Access denied' });
     }
-    console.log(`Fetched ${appointments.length} appointments for ${req.user.role}`);
+    // console.log(`Fetched ${appointments.length} appointments for ${req.user.role}`);
     res.json(appointments);
   } catch (error) {
     console.error('Error fetching appointments:', error.message);
@@ -115,7 +115,7 @@ router.post('/appointments/:id/accept', auth, async (req, res) => {
     if (req.user.role === 'doctor' && appointment.doctorId.toString() === req.user.id) {
       appointment.status = 'confirmed';
       await appointment.save();
-      console.log(`Appointment ${req.params.id} confirmed`);
+      // console.log(`Appointment ${req.params.id} confirmed`);
       res.json({ message: 'Appointment confirmed', appointment });
     } else {
       console.error('Access denied for accept:', req.user.id);
@@ -140,7 +140,7 @@ router.post('/appointments/:id/reject', auth, async (req, res) => {
     ) {
       appointment.status = 'rejected';
       await appointment.save();
-      console.log(`Appointment ${req.params.id} rejected`);
+      // console.log(`Appointment ${req.params.id} rejected`);
       res.json({ message: 'Appointment rejected', appointment });
     } else {
       console.error('Access denied for reject:', req.user.id);
@@ -172,7 +172,7 @@ router.post('/appointments/:id/reschedule', auth, async (req, res) => {
       appointment.time = time;
       appointment.status = 'rescheduled';
       await appointment.save();
-      console.log(`Appointment ${req.params.id} rescheduled`);
+      // console.log(`Appointment ${req.params.id} rescheduled`);
       res.json({ message: 'Appointment rescheduled', appointment });
     } else {
       console.error('Access denied for reschedule:', req.user.id);
