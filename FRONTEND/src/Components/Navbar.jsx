@@ -13,13 +13,17 @@ function Navbar() {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/me`, {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/profile`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUserRole(response.data.role);
+        } else {
+          setUserRole(null);
         }
       } catch (error) {
-        console.error('Error fetching user role:', error.message);
+        console.error('Error fetching user role:', error.response?.data?.message || error.message);
+        localStorage.removeItem('token');
+        setUserRole(null);
       }
     };
     fetchUserRole();
@@ -38,18 +42,13 @@ function Navbar() {
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/doctor-listing', label: 'Doctor' },
-    { to: '/appointement', label: 'Appointement' },
+    { to: '/doctors', label: 'Doctors' },
     { to: '/contact', label: 'Contact' },
+    { to: '/appointment', label: 'Appointment' },
     ...(isLoggedIn
       ? [
           {
-            to:
-              userRole === 'admin'
-                ? '/admin-dashboard'
-                : userRole === 'doctor'
-                ? '/doctor-dashboard'
-                : '/user-dashboard',
+            to: userRole === 'Doctor' ? '/doctor-dashboard' : '/patient-dashboard',
             label: 'Dashboard',
           },
           { to: '#', label: 'Logout', onClick: handleLogout },
@@ -63,7 +62,7 @@ function Navbar() {
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-pink-300 tracking-tight animate-pulse">
-              Team-Up
+              HealthcareApp
             </span>
           </div>
 
@@ -75,9 +74,9 @@ function Navbar() {
                 to={link.to}
                 onClick={link.onClick}
                 className={({ isActive }) =>
-                  `relative text-white px-5 py-3 rounded-xl text-base font-semibold transition-all duration-300 hover:bg-indigo-700/50 hover:shadow-lg hover:scale-105 ${
+                  `relative text-white px-5 py-3 rounded-xl text-base font-semibold transition-all duration-300 hover:bg-blue-700/50 hover:shadow-lg hover:scale-105 ${
                     isActive && link.label !== 'Logout'
-                      ? 'bg-indigo-700/70 shadow-inner text-cyan-200'
+                      ? 'bg-blue-700/70 shadow-inner text-cyan-200'
                       : ''
                   } ${
                     link.label === 'Logout'

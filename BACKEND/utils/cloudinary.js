@@ -1,27 +1,21 @@
-const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const path = require('path');
 
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+const storage = multer.memoryStorage(); // Use memory storage for Cloudinary
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 1024 * 1024 }, // 1MB limit
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+    if (extname && mimetype) {
+      return cb(null, true);
+    } else {
+      cb(new Error('Images only (jpeg, jpg, png)'));
+    }
+  },
 });
 
-const uploadImage = async (fileBuffer) => {
-  try {
-    return await new Promise((resolve, reject) => {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        { resource_type: 'image', folder: 'medical_certificates' },
-        (error, result) => {
-          if (error) reject(error);
-          else resolve(result.secure_url);
-        }
-      );
-      uploadStream.end(fileBuffer);
-    });
-  } catch (error) {
-    throw new Error('Cloudinary upload failed: ' + error.message);
-  }
-};
-
-module.exports = { uploadImage };
+module.exports = { upload };
