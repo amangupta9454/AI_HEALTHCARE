@@ -1,7 +1,7 @@
 const express = require('express');
  const router = express.Router(); 
  const { register, verifyOtp, login, getProfile, updateProfile, listDoctor, getListedDoctors, createAppointment, getPatientAppointments, getDoctorAppointments, acceptAppointment, rejectAppointment, rescheduleAppointment, cancelAppointment, } = require('../controllers/userController'); 
- const authMiddleware = require('../middleware/auth'); 
+ const authMiddleware = require('../Middleware/auth'); 
  router.post('/register', register); 
  router.post('/verify-otp', verifyOtp); 
  router.post('/login', login); 
