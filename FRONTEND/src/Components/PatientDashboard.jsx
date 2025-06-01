@@ -128,47 +128,47 @@ const PatientDashboard = () => {
   if (loading) return <div className="text-center py-10">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4 pt-20">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">Patient Dashboard</h2>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-950 py-10 px-4 pt-20">
+      <div className="max-w-4xl mx-auto rounded-lg shadow-lg p-8 bg-gray-200/10 backdrop-blur-md   border-cyan-400 border-2">
+        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6 underline hover:text-yellow-400">Patient Dashboard</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         {!isEditing ? (
           <div className="space-y-6">
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-blue-600">Profile Details</h3>
+              <h3 className="text-xl font-semibold text-blue-600 text-center underline hover:text-green-400">Profile Details</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Name</p>
-                  <p className="text-lg font-semibold">{user?.name}</p>
+                  <p className="text-sm font-medium text-white">Name</p>
+                  <p className="text-lg font-normal text-white">{user?.name}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Age</p>
-                  <p className="text-lg font-semibold">{user?.age}</p>
+                  <p className="text-sm font-medium text-white">Age</p>
+                  <p className="text-lg font-semibold text-white">{user?.age}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Email</p>
-                  <p className="text-lg font-semibold">{user?.email}</p>
+                  <p className="text-sm font-medium text-white">Email</p>
+                  <p className="text-lg font-semibold text-white">{user?.email}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Mobile</p>
-                  <p className="text-lg font-semibold">{user?.mobile}</p>
+                  <p className="text-sm font-medium text-white">Mobile</p>
+                  <p className="text-lg font-semibold text-white">{user?.mobile}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Address</p>
-                  <p className="text-lg font-semibold">{user?.address}</p>
+                  <p className="text-sm font-medium  text-white">Address</p>
+                  <p className="text-lg font-semibold text-white">{user?.address}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Gender</p>
-                  <p className="text-lg font-semibold">{user?.gender}</p>
+                  <p className="text-sm font-medium text-white">Gender</p>
+                  <p className="text-lg font-semibold text-white">{user?.gender}</p>
                 </div>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-600">Remark</p>
-                <p className="text-lg font-semibold">{user?.remark || 'N/A'}</p>
+                <p className="text-sm font-medium text-white">Remark</p>
+                <p className="text-lg font-semibold text-white">{user?.remark || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-600">Previous Treatment</p>
-                <p className="text-lg font-semibold">{user?.previousTreatment || 'N/A'}</p>
+                <p className="text-sm font-medium text-white">Previous Treatment</p>
+                <p className="text-lg font-semibold text-white">{user?.previousTreatment || 'N/A'}</p>
               </div>
               <button
                 onClick={toggleEdit}
@@ -178,29 +178,29 @@ const PatientDashboard = () => {
               </button>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-blue-600">Appointments</h3>
+              <h3 className="text-xl font-semibold text-blue-600 text-center hover:text-red-500 underline">Appointments</h3>
               {appointments.length === 0 ? (
-                <p className="text-center text-gray-600">No appointments booked.</p>
+                <p className="text-center text-white">No appointments booked.</p>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="min-w-full bg-white border">
+                  <table className="min-w-full bg-transparent border">
                     <thead>
-                      <tr className="bg-gray-100">
-                        <th className="py-2 px-4 border">Doctor</th>
-                        <th className="py-2 px-4 border">Date</th>
-                        <th className="py-2 px-4 border">Time</th>
-                        <th className="py-2 px-4 border">Status</th>
-                        <th className="py-2 px-4 border">Actions</th>
+                      <tr className="bg-transparent">
+                        <th className="py-2 px-4 border text-white border-green-500">Doctor</th>
+                        <th className="py-2 px-4 border text-white border-green-500">Date</th>
+                        <th className="py-2 px-4 border text-white border-green-500">Time</th>
+                        <th className="py-2 px-4 border text-white border-green-500">Status</th>
+                        <th className="py-2 px-4 border text-white border-green-500">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {appointments.map((appt) => (
                         <tr key={appt._id}>
-                          <td className="py-2 px-4 border">{appt.doctorName}</td>
-                          <td className="py-2 px-4 border">{new Date(appt.date).toLocaleDateString()}</td>
-                          <td className="py-2 px-4 border">{appt.time}</td>
-                          <td className="py-2 px-4 border">{appt.status}</td>
-                          <td className="py-2 px-4 border space-x-2">
+                          <td className="py-2 px-4 border border-green-500 text-white">{appt.doctorName}</td>
+                          <td className="py-2 px-4 border border-green-500 text-white">{new Date(appt.date).toLocaleDateString()}</td>
+                          <td className="py-2 px-4 border border-green-500 text-white">{appt.time}</td>
+                          <td className="py-2 px-4 border border-green-500 text-white">{appt.status}</td>
+                          <td className="py-2 px-4 border space-x-2 border-green-500 text-white">
                             {['Pending', 'Accepted'].includes(appt.status) && (
                               <button
                                 onClick={() => {
