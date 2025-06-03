@@ -43,8 +43,8 @@ function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/doctors', label: 'Doctors' },
-    { to: '/contact', label: 'Contact' },
     { to: '/appointment', label: 'Appointment' },
+    { to: '/contact', label: 'Contact' },
     ...(isLoggedIn
       ? [
           {

@@ -40,7 +40,7 @@ const Home = () => {
               Experience compassionate care with cutting-edge technology, dedicated to your well-being.
             </p>
             <Link
-              to="/appointement"
+              to="/appointment"
               className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 relative overflow-hidden group"
               aria-label="Get started with your appointment"
             >
@@ -134,7 +134,7 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 lg:gap-8">
             <Link
-              to="/appointement"
+              to="/appointment"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 relative overflow-hidden group animate-pulse-hover"
               aria-label="Book an appointment"
             >
