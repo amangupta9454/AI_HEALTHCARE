@@ -41,6 +41,7 @@ import Contact from './Components/Contact';
 import Register from './Components/Register';
 import Appointement from './Components/Appointement';
 import Login from './Components/Login';
+import Review from './Components/Review';
 import PatientDashboard from './Components/PatientDashboard';
 import DoctorDashboard from './Components/DoctorDashboard';
 import Doctor from './Components/Doctor';
@@ -98,6 +99,7 @@ function App() {
         <Route path="/appointment" element={<Appointement/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/review" element={<Review />} />
         <Route path="/doctors" element={<Doctor />} />
         <Route path="/" element={<Login />} />
         <Route element={<ProtectedRoute allowedRole="Patient" />}>

@@ -45,6 +45,7 @@ function Navbar() {
     { to: '/doctors', label: 'Doctors' },
     { to: '/appointment', label: 'Appointment' },
     { to: '/contact', label: 'Contact' },
+    {to: '/review', label: 'Review'},
     ...(isLoggedIn
       ? [
           {
